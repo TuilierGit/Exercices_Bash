@@ -1,0 +1,6 @@
+Hors-de-la-galaxie/Kamino
+Mondes-du-Noyau/Coruscant
+Bordure-Exterieure/Subterrel
+Bordure-Exterieure/Tatooine
+Bordure-Mediane/Naboo
+Localisation-inconnue/Geonosis

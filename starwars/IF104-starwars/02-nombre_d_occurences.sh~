@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+# La variable _galaxy_ défini le répertoire de base ou est stocké la
+# cartographie de la galaxie starwars. NE PAS MODIFIER, et l'utiliser
+# comme chemin de base pour naviguer dans l'univers StarWars. Evitez
+# les chemins relatifs relatifs.
+subjdir=$PWD/$( dirname $0 )
+galaxy=$subjdir/starwars
+
+# ex 02: Tests / arguments / commandes de bases
+#
+# Ecrire un script/une commande qui permette de compter le nombre
+# d'occurence d'une planète (Le nombre de titres dans lesquels elle
+# apparaît):
+#   ./02-nombre_d_occurences.sh _region_ _planete_
+#
+# Ce script prendre en paramètre deux arguments. On ne fera pas
+# attention aux éventuels arguments superflus.
+# Si le nombre d'argument est incorrect, il devra renvoyer:
+#         - "Region missing" si aucun argument n'est donné et quitter
+#         - "Planet missing" si un seul argument est donné et quitter
+#
+# Ensuite, il renverra:
+#         - "Region unknown" si la région n'existe pas et quitter
+#         - "Planet unknown" si la planete n'existe pas et quitter
+#
+# Enfin, si tous ces tests sont passés. Il devra renvoyer le nombre
+# d'occurences de la planète en question.
+#
+

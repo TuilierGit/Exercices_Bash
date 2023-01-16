@@ -1,0 +1,150 @@
+#!/usr/bin/env bash
+
+# La variable _galaxy_ défini le répertoire de base ou est stocké la
+# cartographie de la galaxie starwars. NE PAS MODIFIER, et l'utiliser
+# comme chemin de base pour naviguer dans l'univers StarWars. Evitez
+# les chemins relatifs relatifs.
+subjdir=$PWD/$( dirname $0 )
+galaxy=$subjdir/starwars
+
+#
+# _Indice_ :
+#     - cut, awk, sort, uniq, grep, cat, sed, ...
+#     - echo $variable | sed => permet de modifier une variable
+#    ou
+#     - echo $variable | awk => permet de modifier une variable
+#
+
+
+regions=$(ls $galaxy)
+
+function sum_year()
+{
+    # Ecrire une fonction qui retourne la somme entre l'année du
+    # titre passé en premier argument et le nombre
+    # passé en second argument.
+    #   - Le premier argument correspond à un titre avec ou sans le repertoire prefix
+    #   - Le deuxième argument est une valeur entière quelconque à ajouter
+    # 
+    # Afficher la somme de l'année du titre et du deuxième argument.
+    # _Rq_: On considère qu'il y a toujours 2 arguments corrects passés à la fonction
+    # _Exemple_:
+    #   sum_year 2014-Star_Wars_Rebels 25
+    #   devra afficher "2039"
+    #
+
+    a=$(echo $1 | cut -d "-" -f 1)
+    a=$(( $a + $2 ))
+    echo $a
+
+    return 0
+}
+
+
+
+
+
+function list_planets()
+{
+    # Retourne la liste des planetes visitées (1 par ligne) par un titre donné en paramètre.
+    # Le premier argument correspond à un titre seul (sous la forme ANNEE-Titre sans
+    # le préfixe de planète)
+    # Afficher la liste des planètes visitées par ce titre
+    # On considère qu'il y a toujours 1 argument correct passé à la fonction et que celui-ci est valide.
+    titre=$(echo $1) # | cut -d "-" -f 2)
+    #echo $titre
+    
+    for r in $regions
+    do
+	for p in $(ls $galaxy/$r)
+	do
+	    for a in $(ls $galaxy/$r/$p)
+	    do
+		b=$(echo $a | grep $titre)
+	        if [[ -n $b ]]
+		then
+		    echo $r/$p
+		fi
+	    done
+	done
+    done
+    
+    return 0
+}
+
+
+
+
+
+function largest_number()
+{
+    # Cette fonction prend en paramètre un type de média *valide* (Film, TV, ...)
+    # Le but est de retourner pour ce media donné, le titre qui a visité le plus grand nombre de planètes
+    #
+    #
+    # Aide: Les fichiers ANNEE-Titre ne contiennent *que* le type de
+    # média.
+    #     1 - Commencez donc par lister tous les fichiers
+    #     (starwars/region/planete/ANNEE-Titre) contenant le type de
+    #     média demandé.
+    #     2 - Une fois cette liste trouvée, faites en sorte de ne
+    #     garder que le nom du fichier ANNEE-titre
+    #     3 - Trouver la solution pour réduire cette liste en ne
+    #     gardant que celui qui apparaitra le plus grand nombre de
+    #     fois.
+    #
+    # Rq: On considère qu'il y a toujours 1 argument valide passé à la fonction
+
+    nb_result=0
+    
+    for r in $regions
+    do
+	for p in $(ls $galaxy/$r)
+	do
+	    for a in $(ls $galaxy/$r/$p)
+	    do
+		b=$(cat $galaxy/$r/$p/$a | grep $1)
+	        if [[ -n $b ]]
+		then
+		    nb_result=$(( $nb_result + 1 ))
+		    echo $a
+		    #echo $a >> doc.txt
+
+		    
+		    #s=$( "$s" + "$a" )
+		    #echo $s
+		fi
+	    done
+	done
+    done
+    #echo $nb_result
+    #uniq -c doc.txt
+
+    return 0
+}
+
+#
+# Voici quelques lignes qui peuvent vous permettre de tester votre
+# code avant validation par le script starwars.sh
+# Pour cela commenter/décommenter les lignes suivantes. Cela n'aura pas
+# d'impact sur la validation sous réserve qu'elles ne créent pas
+# d'erreurs
+#
+
+echo "---- sum_year 2017-Star_Wars_Battlefront_II 25 ----"
+sum_year 2017-Star_Wars_Battlefront_II 25
+
+echo "---- sum_year 1977-Star_Wars 16 ----"
+sum_year 1977-Star_Wars 16
+
+echo "---- list_planets 1977-Star_Wars ----"
+list_planets 1977-Star_Wars 
+
+echo "---- list_planets 2017-Star_Wars_Battlefront_II ----"
+list_planets 2017-Star_Wars_Battlefront_II
+
+echo "---- largest_number Film ----"
+largest_number Film
+
+echo "---- largest_number TV ----"
+largest_number TV

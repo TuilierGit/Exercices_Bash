@@ -1,0 +1,173 @@
+#!/usr/bin/env bash
+
+# La variable _galaxy_ défini le répertoire de base ou est stocké la
+# cartographie de la galaxie starwars. NE PAS MODIFIER, et l'utiliser
+# comme chemin de base pour naviguer dans l'univers StarWars. Evitez
+# les chemins relatifs relatifs.
+subjdir=$PWD/$( dirname $0 )
+
+# Ajoutons les variables et fonctions définies dans la section Chevalier (DO NOT TOUCH THIS LINE)
+source ${subjdir}/1-ChevalierJedi.sh 2> /dev/null > /dev/null
+
+##
+# Etape 1: Trouver le bon média
+#
+# Stocker dans la variable typemedia, le type de media à utiliser Vous
+# avez le droit de lire l'information dans le fichier si vous la
+# trouvez et de faire un echo dans la fonction. A vous de voir ce qui
+# est le plus rapide.
+#
+##
+find_media()
+{
+    # Recherche de motif avancée (/ analyse lexicale)
+    #
+    # Trouver l'unique fichier 'Description' qui contient une ligne débutant par "Yoda"
+    # Le dernier mot de cette même ligne sera le type de media recherché.
+    # Retourner/afficher le media trouvé
+
+    # WORK HERE
+
+    for r in $regions
+    do
+	for p in $(ls $galaxy/$r)
+	do
+	    for a in $(ls $galaxy/$r/$p)
+	    do
+		b=$(echo $a | grep "Description")
+	        if [[ -n $b ]]
+		then
+		    c=$(cat $b | grep ^"Yoda")
+		    if [[ -n $c ]]
+		    then
+			echo $c
+		    fi
+		fi
+	    done
+	done
+    done
+
+    return 0
+}
+
+
+
+
+
+
+
+
+
+
+## DO NOT TOUCH and DO NOT modify typemedia after this line
+typemedia=$( find_media )
+echo "Le type de media est : $typemedia"
+##
+
+##
+# Etape 2
+#
+# Maintenant il faut trouver le titre qui visite le plus de planetes
+# pour le stocker dans la variable titre.
+#
+# Indice: normalement vous avez le résultat au niveau ChevalierJedi
+# donc il suffit d'appeler la fonction retournant ce résultat
+#
+# Return format: Annee-Titre
+#
+find_title()
+{
+    # WORK HERE
+}
+
+## DO NOT TOUCH and DO NOT modify titre after this line
+titre=$( find_title $typemedia )
+echo "Le titre du media qui nous interrese est : $titre"
+##
+
+##
+# Etape 3
+#
+# On a besoin désormais de trouver l'avant derniere planete par ordre
+# alphabétique visitée par ce titre.
+#
+find_planet()
+{
+    # Tri avancé
+    #
+    # Indice: l'une des fonctions de ChevalierJedi vous donnera la liste
+    # des planetes sous le bon format.
+    # Il "suffit" donc de la trier et de retourner l'avant-dernière
+    #
+    # Attention de bien retourner la planete au forma _region_/_planete_
+    #
+
+    # WORK HERE
+}
+
+## DO NOT TOUCH and DO NOT modify planete after this line
+planete=$( find_planet $titre )
+echo "Le planete de depart est : $planete"
+##
+
+##
+# Etape 4 - boucle et cie
+#
+# Il faut suivre le chemin marqué par R2D2 jusqu'à destination à
+# partir de la planete trouvée précédemment
+#
+# A la fin destination doit contenir le nom de la planete finale
+#
+# Remarque: On sauvegardera dans 'voyage.txt' chaque saut sur une ligne dans le format
+# "origin -> destination".
+#
+find_destination()
+{
+    #
+    # Boucle, recherche de motifs, analyse lexicale
+    # 
+    # En partant de la planete donnée en argument, suivez les
+    # indications de R2D2 jusqu'à la destination finale.
+    #
+    # On rappele que R2D2 ajoute "BipPlanete" dans le fichier
+    # Description de la planète. Bip pouvant être remplacé par Bap,
+    # Bop ou Bup, et Planete indique la planete suivante (sans la
+    # région, mais chaque planete est unique).
+    #
+    # Attention de n'afficher/retourner QUE la destination finale
+
+}
+
+## DO NOT TOUCH and DO NOT modify destination after this line
+destination=$( find_destination $planete )
+echo "La planete finale est : $destination"
+if [ ! -z $destination ]
+then
+    if [ -f $galaxy/*/$destination/Description ]
+    then
+	echo "--- Description de la destination $destination ---"
+	cat $galaxy/*/$destination/Description
+	echo "------------------------------------------"
+    fi
+fi
+##
+
+#
+# La solution finale est dans le fichier suivant.
+#
+find_year()
+{
+    # Modifier find_destination pour trouver un moyen de calculer le nombre de déplacements effectués
+    nb_deplacements=0
+    
+    # WORK HERE
+    
+    sum_year $titre $nb_deplacements
+}
+
+## DO NOT TOUCH and DO NOT modify solution after this line
+annee=$( find_year )
+solution=$galaxy/*/$destination/$annee-Looking_for_Luke
+
+echo "Luke se cache dans le fichier : $solution"
+##

@@ -1,0 +1,9 @@
+Bordure-Exterieure/Dantooine/1977-A_New_Hope
+Bordure-Exterieure/Kessel/1977-Star_Wars
+Bordure-Exterieure/Tatooine/1977-A_New_Hope
+Bordure-Exterieure/Yavin/1977-Star_Wars
+Bordure-Exterieure/Yavin-IV/1977-Star_Wars
+Bordure-Mediane/Kashyyyk/1978-Star_Wars_Holiday_Special
+Mondes-du-Noyau/Alderaan/1977-A_New_Hope
+Mondes-du-Noyau/Corellia/1977-A_New_Hope
+Zone-d_expansion/Mimban/1978-Star_Wars_Legends:_Splinter_of_the_Mind_s_Eye

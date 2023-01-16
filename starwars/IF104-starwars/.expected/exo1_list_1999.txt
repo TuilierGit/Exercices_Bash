@@ -1,0 +1,5 @@
+Mondes-du-Noyau/Coruscant
+Bordure-Exterieure/Tatooine
+Bordure-Exterieure/Iego
+Bordure-Mediane/Malastare
+Bordure-Mediane/Naboo
